@@ -1,15 +1,15 @@
 # d20cards
 ### Designed and implemented by Carlos, Pau L. And Pau G.
 
-## Fase 1. Situation analysis and prototyping of the information system.
+## Phase 1. Situation analysis and prototyping of the information system.
 
 ### 1. Choosing information system
 
 * We have chosen to implement a database for card games such as *Magic* or *Wharhammer* mostly based on d20 steriotypical board games.
   
-> Our reason for choose this topic is mostly related to the basic knowldage of this theme that we already have and a posibly interesting ending; being able to move the cards onto the machine and create new cards to even get more difficult plays, or maybe help the DM *(Dungeon Master)* in creating  his enemies for next oneshots or campains.
+> Our reason for choose this topic is largely related to the basic knowldage of this theme, and the potentially interesting outcome of the project: being able to move the cards onto a machine and create new cards to make the game more challenging, or perhaps assist the DM *(Dungeon Master)* in creating  in creating enemies for upcoming one-shots or campaigns.
 
->Besides the basics we also like the idea of a more complex build and the probably overwhelming items we will have to deal with. 
+>Beyond the basics we also like the idea of a more complex build and handling the likely overwhelming number of items we'll need to manage 
 
 
 * Ideally this database will manage: 
@@ -23,15 +23,51 @@
 |Object|id, Name, description, weigh, added attributes |
 |Character|Cards to use, points, hp, dmg, max weigh, badOmens |
 |Play|characters, users, rounds, numberofcards, active? |
-|Efectos|id, |
+|Effects|id, name, description|
 
 This should work as:  
 1.  User logs in and  creates a character with name.
 2.  Then the  user will ask a number of cards  given to him randomly
-3.  After, the user will join a playthru with simmilar cards number 
-    * The user rounds and play rounds will increase such as the timer (adding 20 minutes each round). 
-    * Imagine: user1 and user2 are in an active play, user1  chooses to  atack user2's beast, one has 6hp and the other 4hp, if the attack is succesful the user2's beast will discard and his hp will go down 2hp points.
-    * Imagine: user2 in search of revenge will cast a spell and freeze user1's beast, this will result in the death of the beast and the freeze will affect user1(resting 1 in mana).
-    * Any user is able to do a *mulligan*(Discard hand and recieve new ones, no posibility of recalling the first hand) in round 1, then once  the card is used will go on the graveyard and will no longer play.
-    * Once every 10 rounds the users will be able to draw more cards, never exceeding the number of cards choosen at the start.
+3.  After, the user will join a playthrough with simmilar cards number 
+    * The user rounds and play rounds will increase as the timer adds 20 minutes per round.
+    * Example: User1 and User2 are in an active play. User1 chooses to attack User2's beast, which has 6 hp, while User1's beast has 4 hp. If the attack is successful, User2's beast will be discarded, and User2 will lose 2 hp.
+    * Example: In retaliation, User2 casts a spell to freeze User1's beast. This results in the death of User1's beast, and the freeze effect reduces User1's mana by 1 point.
+    * Any user is able to do a *mulligan*(Discard hand and recieve new ones, no posibility of recalling the first hand) in round 1. Once a card is used, it will go to the graveyard and can no longer be played.
+    * Once every 10 rounds the users will be able to draw more cards, but they can never exceed the number of cards chosen at the start.
   
+
+
+### 3. Methodologies
+  We had already thought about this topic beforehand, so it was relatively easy to manage. We developed three different versions and combined the best elements from each.
+
+- For this we used git as versions control.
+- Vscode for typing the README and scripts.
+- dia for the E-R.
+- Excel for the basic typo of the database.
+
+> It is sort of difficult for us to present the original version as it emerged brainstorm.
+
+### 4. Results
+
+Now we´ll see a previous version of  the tables:
+<img src="./Diagram/diagrama.png" alt="basic table preview" width="100%" />
+
+And Added the cardinality of these tables.
+<img src="./Diagram/diagramV2.png" alt="implemented card" width="100%" />
+
+At firs we had some difficulties understanding how it should work but we believe the versions have been upgraded and we've learned a better aproach for implementing the idea,
+
+#### v1 d20cards
+Originally  we envisioned having a character, two types of cards, and gameplay based exclusively on _RNG_ (random number generation) or luck, but this seemed a bit dull.
+
+This version came from a brainstorming session.
+
+#### v2 d20cards
+Here we wold start to write the introduction with a few more ideas and we began working on the skeleton of the diagram, having a clearer idea of what we wanted to accomplish.
+
+[See dia image](#4-results)
+
+
+> We enjoy challenge :D  
+>So.. This can be done extremely easy or turn into a nightmare (probably the latter).  
+>There hasn't been any significal changes so far.
