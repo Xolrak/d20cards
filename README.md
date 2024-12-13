@@ -1,37 +1,36 @@
 # d20cards
-### Designed and implemented by Carlos, Pau L. And Pau G.
+### Diseñado e implementado por Carlos, Pau L. y Pau G.
 
-## Fase 1. Situation analysis and prototyping of the information system.
+## Fase 1. Análisis de la situación y prototipado del sistema de información.
 
-### 1. Choosing information system
+### 1. Elección del sistema de información
 
-* We have chosen to implement a database for card games such as *Magic* or *Wharhammer* mostly based on d20 steriotypical board games.
+* Hemos elegido implementar una base de datos para juegos de cartas como Magic o Warhammer, principalmente basados en juegos de mesa estereotípicos de d20.
   
-> Our reason for choose this topic is mostly related to the basic knowldage of this theme that we already have and a posibly interesting ending; being able to move the cards onto the machine and create new cards to even get more difficult plays, or maybe help the DM *(Dungeon Master)* in creating  his enemies for next oneshots or campains.
+> Nuestra razón para elegir este tema está principalmente relacionada con el conocimiento básico de este tema que ya tenemos y un posible final interesante; poder mover las cartas a la máquina y crear nuevas cartas para realizar jugadas aún más difíciles, o tal vez ayudar al DM (Dungeon Master) en la creación de sus enemigos para futuras partidas o campañas.
 
->Besides the basics we also like the idea of a more complex build and the probably overwhelming items we will have to deal with. 
+>Además de lo básico, también nos gusta la idea de una construcción más compleja y los probablemente abrumadores elementos con los que tendremos que lidiar.
 
-
-* Ideally this database will manage: 
+* Idealmente, esta base de datos gestionará:
   
-|Table|Attributes |
+|Tabla|Atributos|
 |----|----|
-|Cards|id, Name, call to card type(an id) |
-|User|id, Name,CharacterID, rounds, *is he/she a DM?* |
-|Spell|id, Name, description, dmg, mana needed to invoque |
-|Beast|id, Name, description, dmg, hp, mana needed to invoque |
-|Object|id, Name, description, weigh, added attributes |
-|Character|Cards to use, points, hp, dmg, max weigh, badOmens |
-|Play|characters, users, rounds, numberofcards, active? |
+|Cartas|id, Nombre, tipo de carta (un id) |
+|Usuario|id, Nombre, CharacterID, rondas, *¿es un/una DM?* |
+|Hechizo|id, Nombre, descripción, daño, maná necesario para invocar|
+|Bestia|id, Nombre, descripción, daño, hp, maná necesario para invocar |
+|Objeto|id, Name, description, weigh, added attributeid, Nombre, descripción, peso, atributos adicionaless |
+|Personaje|Cartas a usar, puntos, hp, daño, peso máximo, maldiciones |
+|Partida|personajes, usuarios, rondas, número de cartas, ¿activo? |
 |Efectos|id, |
 
-This should work as:  
-1.  User logs in and  creates a character with name.
-2.  Then the  user will ask a number of cards  given to him randomly
-3.  After, the user will join a playthru with simmilar cards number 
-    * The user rounds and play rounds will increase such as the timer (adding 20 minutes each round). 
-    * Imagine: user1 and user2 are in an active play, user1  chooses to  atack user2's beast, one has 6hp and the other 4hp, if the attack is succesful the user2's beast will discard and his hp will go down 2hp points.
-    * Imagine: user2 in search of revenge will cast a spell and freeze user1's beast, this will result in the death of the beast and the freeze will affect user1(resting 1 in mana).
-    * Any user is able to do a *mulligan*(Discard hand and recieve new ones, no posibility of recalling the first hand) in round 1, then once  the card is used will go on the graveyard and will no longer play.
-    * Once every 10 rounds the users will be able to draw more cards, never exceeding the number of cards choosen at the start.
-  
+Esto debería funcionar de la siguiente manera:
+1.  El usuario inicia sesión y crea un personaje con un nombre.
+2.  Luego, el usuario solicitará un número de cartas que se le entregarán aleatoriamente.
+3. Después, el usuario se unirá a una partida con un número similar de cartas.
+    * Las rondas del usuario y las rondas de la partida aumentarán, así como el temporizador (agregando 20 minutos por ronda).
+    * Imagina: el usuario1 y el usuario2 están en una partida activa, el usuario1 elige atacar la bestia del usuario2, una tiene 6hp y la otra 4hp; si el ataque tiene éxito, la bestia del usuario2 será descartada y su hp bajará 2 puntos.
+    * Imagina: el usuario2, en busca de venganza, lanzará un hechizo y congelará la bestia del usuario1; esto resultará en la muerte de la bestia y el congelamiento afectará al usuario1 (restando 1 de maná).
+    * Cualquier usuario podrá hacer un mulligan (descartar la mano y recibir una nueva, sin posibilidad de recuperar la primera mano) en la ronda 1, luego, una vez que la carta sea utilizada, irá al cementerio y ya no podrá jugarse.
+    * Una vez cada 10 rondas, los usuarios podrán robar más cartas, sin exceder el número de cartas elegidas al inicio.
+
