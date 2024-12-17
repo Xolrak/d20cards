@@ -1,73 +1,36 @@
 # d20cards
-### Designed and implemented by Carlos, Pau L. And Pau G.
+### Diseñado e implementado por Carlos, Pau L. y Pau G.
 
-## Phase 1. Situation analysis and prototyping of the information system.
+## Fase 1. Análisis de la situación y prototipado del sistema de información.
 
-### 1. Choosing information system
+### 1. Elección del sistema de información
 
-* We have chosen to implement a database for card games such as *Magic* or *Wharhammer* mostly based on d20 steriotypical board games.
+* Hemos elegido implementar una base de datos para juegos de cartas como Magic o Warhammer, principalmente basados en juegos de mesa estereotípicos de d20.
   
-> Our reason for choose this topic is largely related to the basic knowldage of this theme, and the potentially interesting outcome of the project: being able to move the cards onto a machine and create new cards to make the game more challenging, or perhaps assist the DM *(Dungeon Master)* in creating  in creating enemies for upcoming one-shots or campaigns.
+> Nuestra razón para elegir este tema está principalmente relacionada con el conocimiento básico de este tema que ya tenemos y un posible final interesante; poder mover las cartas a la máquina y crear nuevas cartas para realizar jugadas aún más difíciles, o tal vez ayudar al DM (Dungeon Master) en la creación de sus enemigos para futuras partidas o campañas.
 
->Beyond the basics we also like the idea of a more complex build and handling the likely overwhelming number of items we'll need to manage 
+>Además de lo básico, también nos gusta la idea de una construcción más compleja y los probablemente abrumadores elementos con los que tendremos que lidiar.
 
-
-* Ideally this database will manage: 
+* Idealmente, esta base de datos gestionará:
   
-|Table|Attributes |
+|Tabla|Atributos|
 |----|----|
-|Cards|id, Name, call to card type(an id) |
-|User|id, Name,CharacterID, rounds, *is he/she a DM?* |
-|Spell|id, Name, description, dmg, mana needed to invoque |
-|Beast|id, Name, description, dmg, hp, mana needed to invoque |
-|Object|id, Name, description, weigh, added attributes |
-|Character|Cards to use, points, hp, dmg, max weigh, badOmens |
-|Play|characters, users, rounds, numberofcards, active? |
-|Effects|id, name, description|
+|Cartas|id, Nombre, tipo de carta (un id) |
+|Usuario|id, Nombre, CharacterID, rondas, *¿es un/una DM?* |
+|Hechizo|id, Nombre, descripción, daño, maná necesario para invocar|
+|Bestia|id, Nombre, descripción, daño, hp, maná necesario para invocar |
+|Objeto|id, Name, description, weigh, added attributeid, Nombre, descripción, peso, atributos adicionaless |
+|Personaje|Cartas a usar, puntos, hp, daño, peso máximo, maldiciones |
+|Partida|personajes, usuarios, rondas, número de cartas, ¿activo? |
+|Efectos|id, |
 
-This should work as:  
-1.  User logs in and  creates a character with name.
-2.  Then the  user will ask a number of cards  given to him randomly
-3.  After, the user will join a playthrough with simmilar cards number 
-    * The user rounds and play rounds will increase as the timer adds 20 minutes per round.
-    * Example: User1 and User2 are in an active play. User1 chooses to attack User2's beast, which has 6 hp, while User1's beast has 4 hp. If the attack is successful, User2's beast will be discarded, and User2 will lose 2 hp.
-    * Example: In retaliation, User2 casts a spell to freeze User1's beast. This results in the death of User1's beast, and the freeze effect reduces User1's mana by 1 point.
-    * Any user is able to do a *mulligan*(Discard hand and recieve new ones, no posibility of recalling the first hand) in round 1. Once a card is used, it will go to the graveyard and can no longer be played.
-    * Once every 10 rounds the users will be able to draw more cards, but they can never exceed the number of cards chosen at the start.
-  
+Esto debería funcionar de la siguiente manera:
+1.  El usuario inicia sesión y crea un personaje con un nombre.
+2.  Luego, el usuario solicitará un número de cartas que se le entregarán aleatoriamente.
+3. Después, el usuario se unirá a una partida con un número similar de cartas.
+    * Las rondas del usuario y las rondas de la partida aumentarán, así como el temporizador (agregando 20 minutos por ronda).
+    * Imagina: el usuario1 y el usuario2 están en una partida activa, el usuario1 elige atacar la bestia del usuario2, una tiene 6hp y la otra 4hp; si el ataque tiene éxito, la bestia del usuario2 será descartada y su hp bajará 2 puntos.
+    * Imagina: el usuario2, en busca de venganza, lanzará un hechizo y congelará la bestia del usuario1; esto resultará en la muerte de la bestia y el congelamiento afectará al usuario1 (restando 1 de maná).
+    * Cualquier usuario podrá hacer un mulligan (descartar la mano y recibir una nueva, sin posibilidad de recuperar la primera mano) en la ronda 1, luego, una vez que la carta sea utilizada, irá al cementerio y ya no podrá jugarse.
+    * Una vez cada 10 rondas, los usuarios podrán robar más cartas, sin exceder el número de cartas elegidas al inicio.
 
-
-### 3. Methodologies
-  We had already thought about this topic beforehand, so it was relatively easy to manage. We developed three different versions and combined the best elements from each.
-
-- For this we used git as versions control.
-- Vscode for typing the README and scripts.
-- dia for the E-R.
-- Excel for the basic typo of the database.
-
-> It is sort of difficult for us to present the original version as it emerged brainstorm.
-
-### 4. Results
-
-Now we´ll see a previous version of  the tables:
-<img src="./Diagram/diagrama.png" alt="basic table preview" width="100%" />
-
-And Added the cardinality of these tables.
-<img src="./Diagram/diagramV2.png" alt="implemented card" width="100%" />
-
-At firs we had some difficulties understanding how it should work but we believe the versions have been upgraded and we've learned a better aproach for implementing the idea,
-
-#### v1 d20cards
-Originally  we envisioned having a character, two types of cards, and gameplay based exclusively on _RNG_ (random number generation) or luck, but this seemed a bit dull.
-
-This version came from a brainstorming session.
-
-#### v2 d20cards
-Here we wold start to write the introduction with a few more ideas and we began working on the skeleton of the diagram, having a clearer idea of what we wanted to accomplish.
-
-[See dia image](#4-results)
-
-
-> We enjoy challenge :D  
->So.. This can be done extremely easy or turn into a nightmare (probably the latter).  
->There hasn't been any significal changes so far.
