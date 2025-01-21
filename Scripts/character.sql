@@ -1,5 +1,6 @@
 -- Script para levantar la tabla character
-CREATE TABLE character (
+-- CAUTION: Antes de levantar esta tabla debe estar creada la tabla users
+CREATE TABLE `character` (
     characterID INT AUTO_INCREMENT,
     userID INT NOT NULL,
     name VARCHAR(255) NOT NULL,
