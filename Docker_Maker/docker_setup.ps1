@@ -28,4 +28,4 @@ docker-compose up -d
 Set-Content -Path "$directorio_bbdd\setup.ps1" -Value $volcado
 
 # Ejecutar el script setup.ps1 con PowerShell
-Start-Process -FilePath "powershell.exe" -ArgumentList "-File `"$directorio_bbdd\setup.ps1`""
+Start-Process -FilePath "powershell.exe" -ArgumentList "-File ""$directorio_bbdd\setup.ps1"""
