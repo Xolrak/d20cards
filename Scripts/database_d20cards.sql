@@ -1,5 +1,5 @@
 -- Script name: database_d20cards.sql
--- Version: 1.0
+-- Version: 2.0
 -- Descripcion: Levanta la base de datos con sus tablas, pero sin datos, totalmente vacia
 
 -- Configuraciones iniciales
@@ -7,12 +7,11 @@ SET FOREIGN_KEY_CHECKS = 0; -- Desactiva comprobaciones de claves foráneas (por
 
 -- Creación de la base de datos
 
-DROP DATABASE IF EXISTS `d20cards`; -- Comprueba si ya existe la base de datos, en caso de que si, la elimina
-CREATE DATABASE `d20cards`;
+CREATE DATABASE IF NOT EXISTS `d20cards`; -- Si no existe la base de datos, la crea
 USE `d20cards`;
 
 -- Levantamiento de tablas en la base de datos
-CREATE TABLE `attributes` (
+CREATE TABLE IF NOT EXISTS `attributes` (
     `attributeID` INT AUTO_INCREMENT, -- Identificador único del atributo
     `name` VARCHAR(255) NOT NULL, -- Nombre del atributo
     `description` TEXT NOT NULL, -- Descripción detallada
@@ -23,7 +22,7 @@ CREATE TABLE `attributes` (
     PRIMARY KEY (`attributeID`) -- Llave primaria
 ) ENGINE=InnoDB;
 
-CREATE TABLE `beast` (
+CREATE TABLE IF NOT EXISTS `beast` (
     `id` INT AUTO_INCREMENT, -- Identificador único de la bestia
     `name` VARCHAR(255) NOT NULL, -- Nombre de la bestia
     `description` TEXT NOT NULL, -- Descripción detallada de la bestia
@@ -33,7 +32,7 @@ CREATE TABLE `beast` (
     PRIMARY KEY (`id`) -- Llave primaria
 ) ENGINE=InnoDB;
 
-CREATE TABLE `cards` (
+CREATE TABLE IF NOT EXISTS `cards` (
     `cardID` INT AUTO_INCREMENT, -- Identificador único de la carta
     `name` VARCHAR(255) NOT NULL, -- Nombre de la carta
     `cardTYPE` VARCHAR(50) NOT NULL, -- Tipo de la carta
@@ -42,7 +41,7 @@ CREATE TABLE `cards` (
     FOREIGN KEY (`id_attribute`) REFERENCES `attributes`(`attributeID`) -- Llave foránea
 ) ENGINE=InnoDB;
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
     `userID` INT AUTO_INCREMENT, -- Identificador único del usuario
     `name` VARCHAR(255) NOT NULL, -- Nombre del usuario
     `characterID` INT NOT NULL, -- ID del personaje asociado
@@ -51,7 +50,7 @@ CREATE TABLE `users` (
     PRIMARY KEY (`userID`) -- Llave primaria
 ) ENGINE=InnoDB;
 
-CREATE TABLE `character` (
+CREATE TABLE IF NOT EXISTS `characters` (
     `characterID` INT AUTO_INCREMENT, -- Identificador único del personaje
     `userID` INT NOT NULL, -- Llave foránea que referencia a la tabla users
     `name` VARCHAR(255) NOT NULL, -- Nombre del personaje
@@ -68,7 +67,7 @@ CREATE TABLE `character` (
     FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) -- Llave foránea
 ) ENGINE=InnoDB;
 
-CREATE TABLE `object` (
+CREATE TABLE IF NOT EXISTS `object` (
     `ObjectID` INT AUTO_INCREMENT, -- Identificador único del objeto
     `name` VARCHAR(255) NOT NULL, -- Nombre del objeto
     `description` TEXT NOT NULL, -- Descripción detallada del objeto
@@ -80,7 +79,7 @@ CREATE TABLE `object` (
     FOREIGN KEY (`attributeID`) REFERENCES `attributes`(`attributeID`) -- Llave foránea
 ) ENGINE=InnoDB;
 
-CREATE TABLE `play` (
+CREATE TABLE IF NOT EXISTS `play` (
     `id` INT AUTO_INCREMENT, -- Identificador único de la partida
     `id_players` INT NOT NULL, -- Llave foránea que referencia a los jugadores
     `id_superuser` INT NOT NULL, -- Llave foránea que referencia al superusuario
@@ -91,7 +90,7 @@ CREATE TABLE `play` (
     FOREIGN KEY (`id_superuser`) REFERENCES `users`(`userID`) -- Llave foránea a la tabla users
 ) ENGINE=InnoDB;
 
-CREATE TABLE `spell` (
+CREATE TABLE IF NOT EXISTS `spell` (
     `spellID` INT AUTO_INCREMENT, -- Identificador único del hechizo
     `name` VARCHAR(255) NOT NULL, -- Nombre del hechizo
     `description` TEXT NOT NULL, -- Descripción del hechizo
