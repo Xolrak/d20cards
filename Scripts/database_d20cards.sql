@@ -6,97 +6,96 @@
 SET FOREIGN_KEY_CHECKS = 0; -- Desactiva comprobaciones de claves foráneas (por si hay dependencias)
 
 -- Creación de la base de datos
-
 CREATE DATABASE IF NOT EXISTS `d20cards`; -- Si no existe la base de datos, la crea
 USE `d20cards`;
 
--- Levantamiento de tablas en la base de datos
-CREATE TABLE IF NOT EXISTS `attributes` (
-    `attributeID` INT AUTO_INCREMENT, -- Identificador único del atributo
-    `name` VARCHAR(255) NOT NULL, -- Nombre del atributo
-    `description` TEXT NOT NULL, -- Descripción detallada
-    `hp` INT NOT NULL, -- Puntos de vida asociados al atributo
-    `dmg` DOUBLE NOT NULL, -- Daño asociado al atributo
-    `mana` DOUBLE NOT NULL, -- Mana asociado al atributo
-    `weight` DOUBLE NOT NULL, -- Peso asociado al atributo
-    PRIMARY KEY (`attributeID`) -- Llave primaria
+-- Creación de tablas en la base de datos
+CREATE TABLE IF NOT EXISTS `atributos` (
+    `atributoID` INT AUTO_INCREMENT, -- Identificador único del atributo
+    `nombre` VARCHAR(255) NOT NULL, -- Nombre del atributo
+    `descripcion` TEXT NOT NULL, -- Descripción detallada
+    `puntos_vida` INT NOT NULL, -- Puntos de vida asociados al atributo
+    `daño` DOUBLE NOT NULL, -- Daño asociado al atributo
+    `mana` DOUBLE NOT NULL, -- Maná asociado al atributo
+    `peso` DOUBLE NOT NULL, -- Peso asociado al atributo
+    PRIMARY KEY (`atributoID`) -- Clave primaria
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `beast` (
+CREATE TABLE IF NOT EXISTS `bestias` (
     `id` INT AUTO_INCREMENT, -- Identificador único de la bestia
-    `name` VARCHAR(255) NOT NULL, -- Nombre de la bestia
-    `description` TEXT NOT NULL, -- Descripción detallada de la bestia
-    `damage` DOUBLE NOT NULL, -- Daño que causa la bestia
-    `hit_points` INT NOT NULL, -- Puntos de vida de la bestia
-    `mana_needed_to_invoque` DOUBLE NOT NULL, -- Mana necesario para invocar a la bestia
-    PRIMARY KEY (`id`) -- Llave primaria
+    `nombre` VARCHAR(255) NOT NULL, -- Nombre de la bestia
+    `descripcion` TEXT NOT NULL, -- Descripción detallada de la bestia
+    `daño` DOUBLE NOT NULL, -- Daño que causa la bestia
+    `puntos_vida` INT NOT NULL, -- Puntos de vida de la bestia
+    `mana_necesario_invocar` DOUBLE NOT NULL, -- Maná necesario para invocar a la bestia
+    PRIMARY KEY (`id`) -- Clave primaria
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `cards` (
-    `cardID` INT AUTO_INCREMENT, -- Identificador único de la carta
-    `name` VARCHAR(255) NOT NULL, -- Nombre de la carta
-    `cardTYPE` VARCHAR(50) NOT NULL, -- Tipo de la carta
-    `id_attribute` INT, -- Llave foránea a la tabla attributes
-    PRIMARY KEY (`cardID`), -- Llave primaria
-    FOREIGN KEY (`id_attribute`) REFERENCES `attributes`(`attributeID`) -- Llave foránea
+CREATE TABLE IF NOT EXISTS `cartas` (
+    `cartasID` INT AUTO_INCREMENT, -- Identificador único de la carta
+    `nombre` VARCHAR(255) NOT NULL, -- Nombre de la carta
+    `tipo_de_cartas` VARCHAR(50) NOT NULL, -- Tipo de la carta
+    `id_atributo` INT, -- Clave foránea a la tabla atributos
+    PRIMARY KEY (`cartasID`), -- Clave primaria
+    FOREIGN KEY (`id_atributo`) REFERENCES `atributos`(`atributoID`) -- Clave foránea
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `users` (
-    `userID` INT AUTO_INCREMENT, -- Identificador único del usuario
-    `name` VARCHAR(255) NOT NULL, -- Nombre del usuario
-    `characterID` INT NOT NULL, -- ID del personaje asociado
-    `rounds` INT NOT NULL, -- Número de rondas jugadas
-    `superuser` BOOLEAN NOT NULL, -- Indica si el usuario es superusuario
-    PRIMARY KEY (`userID`) -- Llave primaria
+CREATE TABLE IF NOT EXISTS `usuarios` (
+    `usuarioID` INT AUTO_INCREMENT, -- Identificador único del usuario
+    `nombre` VARCHAR(255) NOT NULL, -- Nombre del usuario
+    `personajeID` INT NOT NULL, -- ID del personaje asociado
+    `rondas` INT NOT NULL, -- Número de rondas jugadas
+    `superusuario` BOOLEAN NOT NULL, -- Indica si el usuario es superusuario
+    PRIMARY KEY (`usuarioID`) -- Clave primaria
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `characters` (
-    `characterID` INT AUTO_INCREMENT, -- Identificador único del personaje
-    `userID` INT NOT NULL, -- Llave foránea que referencia a la tabla users
-    `name` VARCHAR(255) NOT NULL, -- Nombre del personaje
-    `cardTYPE` VARCHAR(50) NOT NULL, -- Tipo de carta del personaje
-    `numC` INT NOT NULL, -- Número de cartas asociadas
-    `points` INT NOT NULL, -- Puntos acumulados del personaje
-    `hp` INT NOT NULL, -- Puntos de vida del personaje
-    `dmg` DOUBLE NOT NULL, -- Daño del personaje
-    `mana` DOUBLE NOT NULL, -- Mana del personaje
-    `MAXweigh` DOUBLE NOT NULL, -- Peso máximo soportado
-    `badOmen` VARCHAR(255), -- Mala señal (puede ser NULL)
-    `discartedCards` INT NOT NULL, -- Número de cartas descartadas
-    PRIMARY KEY (`characterID`), -- Llave primaria
-    FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) -- Llave foránea
+CREATE TABLE IF NOT EXISTS `personajes` (
+    `personajeID` INT AUTO_INCREMENT, -- Identificador único del personaje
+    `usuarioID` INT NOT NULL, -- Clave foránea que referencia a la tabla usuarios
+    `nombre` VARCHAR(255) NOT NULL, -- Nombre del personaje
+    `tipo_carta` VARCHAR(50) NOT NULL, -- Tipo de carta del personaje
+    `num_cartas` INT NOT NULL, -- Número de cartas asociadas
+    `puntos` INT NOT NULL, -- Puntos acumulados del personaje
+    `vida` INT NOT NULL, -- Puntos de vida del personaje
+    `daño` DOUBLE NOT NULL, -- Daño del personaje
+    `mana` DOUBLE NOT NULL, -- Maná del personaje
+    `peso_maximo` DOUBLE NOT NULL, -- Peso máximo soportado
+    `mala_suerte` VARCHAR(255), -- Mala señal (puede ser NULL)
+    `cartas_descartadas` INT NOT NULL, -- Número de cartas descartadas
+    PRIMARY KEY (`personajeID`), -- Clave primaria
+    FOREIGN KEY (`usuarioID`) REFERENCES `usuarios`(`usuarioID`) -- Clave foránea
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `object` (
-    `ObjectID` INT AUTO_INCREMENT, -- Identificador único del objeto
-    `name` VARCHAR(255) NOT NULL, -- Nombre del objeto
-    `description` TEXT NOT NULL, -- Descripción detallada del objeto
-    `weigh` DOUBLE NOT NULL, -- Peso del objeto
-    `attributeID` INT, -- Llave foránea a la tabla attributes
-    `dmg` DOUBLE NOT NULL, -- Daño del objeto
-    `hp` INT NOT NULL, -- Puntos de vida del objeto
-    PRIMARY KEY (`ObjectID`), -- Llave primaria
-    FOREIGN KEY (`attributeID`) REFERENCES `attributes`(`attributeID`) -- Llave foránea
+CREATE TABLE IF NOT EXISTS `objetos` (
+    `objetoID` INT AUTO_INCREMENT, -- Identificador único del objeto
+    `nombre` VARCHAR(255) NOT NULL, -- Nombre del objeto
+    `descripcion` TEXT NOT NULL, -- Descripción detallada del objeto
+    `peso` DOUBLE NOT NULL, -- Peso del objeto
+    `atributoID` INT, -- Clave foránea a la tabla atributos
+    `daño` DOUBLE NOT NULL, -- Daño del objeto
+    `vida` INT NOT NULL, -- Puntos de vida del objeto
+    PRIMARY KEY (`objetoID`), -- Clave primaria
+    FOREIGN KEY (`atributoID`) REFERENCES `atributos`(`atributoID`) -- Clave foránea
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `play` (
+CREATE TABLE IF NOT EXISTS `partidas` (
     `id` INT AUTO_INCREMENT, -- Identificador único de la partida
-    `id_players` INT NOT NULL, -- Llave foránea que referencia a los jugadores
-    `id_superuser` INT NOT NULL, -- Llave foránea que referencia al superusuario
-    `rounds` INT NOT NULL, -- Número de rondas en la partida
-    `time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha y hora de la partida
-    PRIMARY KEY (`id`), -- Llave primaria
-    FOREIGN KEY (`id_players`) REFERENCES `users`(`userID`), -- Llave foránea a la tabla users
-    FOREIGN KEY (`id_superuser`) REFERENCES `users`(`userID`) -- Llave foránea a la tabla users
+    `id_jugadores` INT NOT NULL, -- Clave foránea que referencia a los jugadores
+    `id_superusuario` INT NOT NULL, -- Clave foránea que referencia al superusuario
+    `rondas` INT NOT NULL, -- Número de rondas en la partida
+    `fecha_hora` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha y hora de la partida
+    PRIMARY KEY (`id`), -- Clave primaria
+    FOREIGN KEY (`id_jugadores`) REFERENCES `usuarios`(`usuarioID`), -- Clave foránea a la tabla usuarios
+    FOREIGN KEY (`id_superusuario`) REFERENCES `usuarios`(`usuarioID`) -- Clave foránea a la tabla usuarios
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `spell` (
-    `spellID` INT AUTO_INCREMENT, -- Identificador único del hechizo
-    `name` VARCHAR(255) NOT NULL, -- Nombre del hechizo
-    `description` TEXT NOT NULL, -- Descripción del hechizo
-    `damage` DOUBLE NOT NULL, -- Daño del hechizo
-    `mana_needed_to_invoque` DOUBLE NOT NULL, -- Mana necesario para invocar el hechizo
-    PRIMARY KEY (`spellID`) -- Llave primaria
+CREATE TABLE IF NOT EXISTS `hechizos` (
+    `hechizoID` INT AUTO_INCREMENT, -- Identificador único del hechizo
+    `nombre` VARCHAR(255) NOT NULL, -- Nombre del hechizo
+    `descripcion` TEXT NOT NULL, -- Descripción del hechizo
+    `daño` DOUBLE NOT NULL, -- Daño del hechizo
+    `mana_necesario_invocar` DOUBLE NOT NULL, -- Maná necesario para invocar el hechizo
+    PRIMARY KEY (`hechizoID`) -- Clave primaria
 ) ENGINE=InnoDB;
 
 -- Reactiva las comprobaciones de claves foráneas
