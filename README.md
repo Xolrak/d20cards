@@ -91,6 +91,4 @@ Tras crear su personaje, el usuario recibe una mano aleatoria de cartas. La base
 Gestión de partidas:
 Los usuarios se unen a partidas con otras personas, y la base de datos sigue el progreso de las partidas, registrando rondas, movimientos y el estado de las cartas (jugadas, descartadas, etc.).
 
-![Diagrama Preview](./Diagram/diagramV2.png)
-
-
+![Diagrama Preview](./Diagram/diagrama_03.png)
